@@ -5,7 +5,7 @@ headers = {
     'Authorization': 'test-server api',
     'Content-Type': 'application/x-www-form-urlencoded',
 }
-radius = 2
+radius = 2.5
 
 
 def geofence_checker(latitude,longitude):
