@@ -1,7 +1,7 @@
 import React from 'react'
 
-import {leaderboard , get_balance} from '../../../test'
-
+import {leaderboard , get_balance} from '../../../test.js'
+import Nav from '../../navbar/index.jsx'
 export default function Leaderboard() {
 
   const [Leaderboard, setLeaderboard] = React.useState([])
@@ -10,11 +10,10 @@ export default function Leaderboard() {
 
 
 
-  function getleaderboard() {
-    console.log("before")
-    let leaderboard_data = leaderboard()
-    console.log("after")
-    console.log(leaderboard_data)
+  async function getleaderboard() {
+    let leaderboard_data = await leaderboard()
+    setLeaderboard(leaderboard_data)
+
   }
 
 
@@ -23,7 +22,21 @@ export default function Leaderboard() {
 
   return (
     <div>
+      <Nav/>
       <button onClick={getleaderboard}>Leaderboard</button>
+
+
+    {
+      Leaderboard.map((item, index) => {
+        return (
+          <div key={index} style={{display: "flex"}}>
+            <div style={{margin: "10px"}}>{item["reporter_adress"]}</div>
+            <div style={{margin: "10px"}}>{item["score"]}</div>
+          </div>
+        )
+      })
+    }
+
     </div>
   )
 }

@@ -1,19 +1,18 @@
+import express from 'express'
+import cors from 'cors'
 
-const express = require('express')
-const cors = require('cors')
-var app = express()
+import {leaderboard } from './test.js'
 
-
-app.use(cors())
+const app = express()
+const port = 3000
 
 app.get('/', (req, res) => {
+  let data = leaderboard()
+  console.log(data)
+  res.send(data)
+  // res.send('Hello World!')
+})
 
-    res.send()
-    }
-)
-
-app.listen(3000, () => {
-    console.log('Example app listening on port 3000!')
-    }
-)
-
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})

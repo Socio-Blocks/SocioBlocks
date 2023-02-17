@@ -16,6 +16,7 @@ import {
   Link
 } from "react-router-dom";
 
+
 function App() {
   const [coin, setCoin] = React.useState(0);
   const [balance, setBalance] = React.useState(0);
@@ -28,20 +29,28 @@ function App() {
 
   useEffect(() => {
     console.log(auth);
+
+    if(auth.user)
+    setWalletAddress(auth.user.address);
+
+
   }, [auth]);
+
+
+
 
 
   return (
     <Router>
     <div>
       <Routes>
-        <Route path="/" element={<Dashboard auth={auth}/>}/>
         <Route path="/Authentication" element={<Authentication auth = {auth}/>}/>
+        <Route path="/" element={<Dashboard auth={auth} setWalletAddress={setWalletAddress}/>}/>
         <Route path="/dashboard" element={<Dashboard auth={auth}/>}/>
         <Route path="/dashboard/leaderboard" element={<Leaderboard />}/>
-        <Route path="/dashboard/clickpicture" element={<Clickpic />}/>
-        <Route path="/rewards" element={<Reward coin={coin} balance={balance} auth={auth}/>}/>
-        <Route path="/dashboard/location" element={<Maps setCoords={setCoords} />} />
+        <Route path="/dashboard/clickpicture" element={<Clickpic auth={auth} walletAddress={walletAddress} setCoin={setCoin}/>}/>
+        <Route path="/rewards" element={<Reward coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
+        <Route path="/dashboard/location" element={<Maps setCoords={setCoords} auth={auth}/>} />
       </Routes>
     </div>
   </Router>

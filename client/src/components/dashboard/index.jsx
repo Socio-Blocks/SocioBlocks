@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import Nav from "../navbar";
 import { useNavigate } from "react-router-dom";
 
-export default function Dashboard({auth}) {
+export default function Dashboard({auth,setWalletAddress}) {
+
 
   const navigate = useNavigate();
   useEffect(() => {

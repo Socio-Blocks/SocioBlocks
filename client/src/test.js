@@ -6,7 +6,7 @@ let tokenAddress = '0x76aD989AfEb306D66fdDE97c2e9F16d0733aDF1C' // Demo Token co
 
 let to_address = '0x6d66341f0363D32f7a1A8b40C1ff472fEd9aaA56' // metro madan thatandhu
 
-let wallet_address = '0xC42BB20a4Fc4392BE53FEa48e91Fe2cceC6a1A6c' //common citizen
+let wallet_address = '0x5d192AEDDD1887a75719f74e3C4CC73106a863A3' //common citizen
 let fromAddress = '0xcF5EE6d9033a6787f26b3da0F7f103e6988184E4' // your wallet
 let contractABI = [
 	{
@@ -542,8 +542,7 @@ let contractABI = [
 	}
 ]
 
-
-
+var data_7;
 
 let contract = new Web3js.eth.Contract(contractABI, tokenAddress, { from: fromAddress })
 // let amount = Web3js.utils.toHex(Web3js.utils.toWei("1")); //1 DEMO Token
@@ -551,6 +550,7 @@ let amount = 1;
 let pothole_id = 1;
 let geofence_id = 1235;
 let intensity = 10;
+
 
 let data_1=contract.methods.balanceOf(wallet_address).encodeABI()
 
@@ -562,9 +562,13 @@ let data_4=contract.methods.paying_integer(wallet_address,to_address,amount).enc
 let data_5=contract.methods.paying_one_decimal(wallet_address,to_address,amount).encodeABI()
 let data_6=contract.methods.paying_two_decimal(wallet_address,to_address,amount).encodeABI()
 
-let data_7 = contract.methods.addreporter(wallet_address,pothole_id, geofence_id, intensity).encodeABI()
 
-function execute_function(input) {
+export function sendCoinParams(wallet_address,pothole_id, geofence_id, intensity){
+	data_7 = contract.methods.addreporter(wallet_address,pothole_id, geofence_id, intensity).encodeABI()
+}
+
+export function execute_function(input) {
+
    let data;
     console.log(input);
    if (input === 'balance') {
@@ -615,23 +619,33 @@ function execute_function(input) {
 
 // execute_function('addreporter');
 
-export function get_balance(wallet_address){
-contract.methods.balance_display(wallet_address).call((error, result) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(result);
-    }
-  })
-}
 
-export function leaderboard(){
-    contract.methods.getTopReporters().call((error, result) => {
-        if (error) {
-            console.error(error);
-        } else {
-			console.log("first");
-            return result;
-        }
-    })
-}
+
+export function get_balance(wallet_address) {
+	return new Promise((resolve, reject) => {
+	  contract.methods.balance_display(wallet_address).call((error, result) => {
+		if (error) {
+		  reject(error);
+		} else {
+		  resolve(result);
+		}
+	  });
+	});
+  }
+  
+
+
+
+export function leaderboard() {
+	return new Promise((resolve, reject) => {
+	  contract.methods.getTopReporters().call((error, result) => {
+		if (error) {
+		  reject(error);
+		} else {
+			console.log("inside");
+		  resolve(result);
+		}
+	  });
+	});
+  }
+  
