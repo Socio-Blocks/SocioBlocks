@@ -1,10 +1,17 @@
 import React, { useEffect,useState } from "react";
 import MapmyIndia from "mapmyindia-react";
 
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function Maps({ setCoords }) {
+  
+  const navigate = useNavigate();
+  useEffect(() => {
+      if (!auth.isLoggedIn) {
+        navigate("/Authentication");
+      }
+    },[])
   const [lat, setLat] = React.useState(0);
   const [lng, setLng] = React.useState(0);
 
@@ -40,7 +47,7 @@ export default function Maps({ setCoords }) {
   }, []);
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div style={{ }}>
       <MapmyIndia
         markers={[
           {
@@ -82,6 +89,7 @@ export default function Maps({ setCoords }) {
             lat: lat,
             lng: lng,
           });
+          navigate("/dashboard/clickpicture");
         }}
       >
         Use Coordinates

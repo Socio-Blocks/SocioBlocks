@@ -6,7 +6,11 @@ import axios from 'axios';
 
 export default function Clickpic(props) {
   const navigate = useNavigate();
-
+  useEffect(() => {
+      if (!auth.isLoggedIn) {
+        navigate("/Authentication");
+      }
+    },[])
   const [dataUri, setDataUri] = React.useState("");
 
 
@@ -54,15 +58,6 @@ export default function Clickpic(props) {
         variant="outlined"
         style={{ width: "80%", marginLeft: "10%", marginTop: "150px" }}
       >
-        <button
-          style={{
-            float: "right",
-            marginBottom: "10px",
-            marginRight: "10px",
-            marginTop: "10px"
-          }} onClick={() => {cameraClosed()}}>
-          Close Camera &nbsp;
-        </button>
         <Camera
           onTakePhoto={dataUri => {
             onCapture(dataUri);
@@ -94,13 +89,22 @@ export default function Clickpic(props) {
           style={{
             marginTop: "-5px",
             textAlign: "center",
-            fontSize: "18px",
-            backgroundColor: "#2997f7",
-            color: "white"
+            fontSize: "18px"
           }}
         >
           <b>Click a Picture with a Pothole to get started!</b>
         </div>
+        <button
+          style={{
+            padding: "10px",
+            marginTop: "10px",
+            marginLeft: "10px",
+            backgroundColor: "#f44336",
+            color: "white",
+            border: "none"
+          }} onClick={() => {cameraClosed()}}>
+          Close Camera
+        </button>
       </div>
   )
 }

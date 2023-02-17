@@ -7,7 +7,8 @@ import Leaderboard from "./components/dashboard/leaderboard";
 import Clickpic from "./components/dashboard/clickpic";
 import Reward from "./components/reward";
 import Maps from "./components/dashboard/location"
-
+import Nav from "./components/navbar";
+import Landing from "./components/landing";
 import {
   BrowserRouter as Router,
   Routes,
@@ -34,10 +35,11 @@ function App() {
     <Router>
     <div>
       <Routes>
-        <Route path="/" element={<Authentication auth = {auth}/>}/>
+        <Route path="/" element={<Dashboard auth={auth}/>}/>
+        <Route path="/Authentication" element={<Authentication auth = {auth}/>}/>
         <Route path="/dashboard" element={<Dashboard auth={auth}/>}/>
         <Route path="/dashboard/leaderboard" element={<Leaderboard />}/>
-        <Route path="/dashboard/Clickpicture" element={<Clickpic />}/>
+        <Route path="/dashboard/clickpicture" element={<Clickpic />}/>
         <Route path="/rewards" element={<Reward coin={coin} balance={balance} auth={auth}/>}/>
         <Route path="/dashboard/location" element={<Maps setCoords={setCoords} />} />
       </Routes>
