@@ -18,11 +18,9 @@ export default function Account({auth,walletAddress}) {
   return (
     <div>
         <h1>Your Account</h1>
-
         <div>Wallet address: {walletAddress}</div>
         <div>Network connected to: https://rpc.testnet.mantle.xyz/ </div>
         <div>auth.provider.rpcConfig.chainId: 5001</div>
-
     </div>
   )
 }

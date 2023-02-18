@@ -50,7 +50,9 @@ export default function Clickpic(props) {
         console.log(response);
         if(response.data === "success"){
           //call blockchain function
+          props.setIscorrectimg(true)
           navigate("/dashboard/location");
+
         }
       })
   }
