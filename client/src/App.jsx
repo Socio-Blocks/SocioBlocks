@@ -29,6 +29,7 @@ function App() {
     lat: 0,
     lng: 0
   });
+  const [iscorrectimg, setIscorrectimg] = React.useState(false);
 
   useEffect(() => {
     console.log(auth);
@@ -51,9 +52,9 @@ function App() {
         <Route path="/" element={<Dashboard auth={auth} setWalletAddress={setWalletAddress}/>}/>
         <Route path="/dashboard" element={<Dashboard auth={auth}/>}/>
         <Route path="/dashboard/leaderboard" element={<Leaderboard />}/>
-        <Route path="/dashboard/clickpicture" element={<Clickpic auth={auth} walletAddress={walletAddress} setCoin={setCoin}/>}/>
+        <Route path="/dashboard/clickpicture" element={<Clickpic auth={auth} walletAddress={walletAddress} setCoin={setCoin} setIscorrectimg={setIscorrectimg}/>}/>
         <Route path="/rewards" element={<Reward coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
-        <Route path="/dashboard/location" element={<Maps setCoords={setCoords} auth={auth} walletAddress={walletAddress} setCoin={setCoin}/>} />
+        <Route path="/dashboard/location" element={<Maps setCoords={setCoords} auth={auth} walletAddress={walletAddress} setCoin={setCoin} iscorrectimg={iscorrectimg} setIscorrectimg={setIscorrectimg}/>} />
         <Route path="/Account" element={<Account auth={auth} walletAddress={walletAddress}/>}/>
         <Route path="/logout" element={<Logout auth={auth}/>}/>
       </Routes>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Nav from "../../navbar";
 import {sendCoinParams,execute_function,setCheckParams} from "../../../test.js"
 
-export default function Maps({ setCoords,auth,walletAddress,setCoin }) {
+export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg,setIscorrectimg }) {
   
   const navigate = useNavigate();
   // useEffect(() => {
@@ -46,10 +46,12 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin }) {
         sendCoinParams(walletAddress,1,response.data.geofence_id,10)
         setCoin(2)
         execute_function("addreporter")
+        setIscorrectimg(false)
       } else {
         setStatus("coordinates are invalid");
         setCheckParams(response.data.geofence_id,walletAddress)
         execute_function("check")
+        setIscorrectimg(false)
       }
     });
     setCoords({
@@ -98,6 +100,8 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin }) {
         Your cordinates are {lat} and {lng}
       </div>
       <div>{status}</div>
+{iscorrectimg?
+<>
       <button
         onClick={() => {
           setgpscords();
@@ -111,7 +115,9 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin }) {
         }}
       >
         Use Coordinates
-      </button>
+      </button></>:  <></>
+
+}
     </div>
   );
 }
