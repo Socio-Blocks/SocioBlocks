@@ -40,8 +40,8 @@ def image():
     model = tf.keras.models.load_model('./Model/Model95')
     im_dat = np.array([get_image(f"./output.jpg")])
     op = model.predict(im_dat)
-    op = op[0][0][0]
-    if(op > 0.5):
+    op = op[0][0]
+    if(np.argmax(op) == 1):
         print("Pothole")
         return 'Success'
     else:
