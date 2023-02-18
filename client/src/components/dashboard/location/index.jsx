@@ -4,7 +4,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Nav from "../../navbar";
 import {sendCoinParams,execute_function,setCheckParams} from "../../../test.js"
-
+import Fab from '@mui/material/Fab';
+import NavigationIcon from '@mui/icons-material/Navigation';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import nav from "../../../assets/nav.gif"
 export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg,setIscorrectimg }) {
   
   const navigate = useNavigate();
@@ -17,26 +24,11 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
   const [lng, setLng] = React.useState(0);
 
   const [status, setStatus] = React.useState("gps coordinates used");
-
-  useEffect(() => {
-    console.log(lat, lng);
-  }, [lat, lng]);
-
-  const setgpscords = () => {
-    navigator.geolocation.watchPosition(
-      function (position) {
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
-      },
-      function (error) {
-        console.error("Error Code = " + error.code + " - " + error.message);
-      }
-    );
-  };
-
+  const [address, setAddress] = React.useState({});
 
   const takecords = async () => {
-    await axios.post("https://511e-122-50-208-12.in.ngrok.io/api/fence", {
+    // console.log(lat, lng);
+    await axios.post("https://2599-122-50-208-12.in.ngrok.io/api/fence", {
       lat: lat,
       lng: lng,
     }).then(function (response) {
@@ -58,23 +50,39 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
       lat: lat,
       lng: lng,
     });
-    
-
     navigate("/rewards");
   };
+
+
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       function (position) {
-        console.log(position);
         setLat(position.coords.latitude);
         setLng(position.coords.longitude);
+        var options = {
+          method: 'GET',
+          url: 'https://apis.mapmyindia.com/advancedmaps/v1/j2op5cr3mnxrgtqtejvpnuxg4pdvs1qc/rev_geocode',
+          params: {lat: position.coords.latitude, lng: position.coords.longitude}
+        };
+        
+        axios.request(options).then(function (response) {
+          setAddress(response.data.results[0])
+        }).catch(function (error) {
+          console.error(error);
+        });
       },
       function (error) {
         console.error("Error Code = " + error.code + " - " + error.message);
       }
     );
   }, []);
+
+
+  useEffect(() => {
+    console.log(address);
+  }, [address]);
 
   return (
     <div style={{ }}>
@@ -96,28 +104,36 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
         ]}
       />
 
-      <div>
-        Your cordinates are {lat} and {lng}
-      </div>
-      <div>{status}</div>
-{iscorrectimg?
-<>
-      <button
-        onClick={() => {
-          setgpscords();
-        }}
-      >
-        Use GPS
-      </button>
-      <button
-        onClick={() => {
-          takecords();
-        }}
-      >
-        Use Coordinates
-      </button></>:  <></>
+<div style={{height:"100%",display:"flex",alignItems:"center",flexDirection:"column",margin:"1em"}}>
 
+
+<Card sx={{ maxWidth: 700,margin: "2em",display:"flex",flexDirection:"row"}}>
+      <CardMedia
+        sx={{ width: 300 }}
+        src={nav}
+        title="green iguana"
+      >
+      <img src={nav} style={{height: "100%", width:"100%"}}/></CardMedia>
+      <CardContent sx={{backgroundColor:"#1a2027", color:"white"}}>
+        <Typography gutterBottom variant="h5" component="div">
+          Address
+        </Typography>
+        <Typography variant="body2">
+          {address.formatted_address}
+        </Typography>
+      </CardContent>
+    </Card>
+
+
+    {iscorrectimg?
+<><Fab variant="extended" color="secondary" onClick={()=> takecords()}>
+<NavigationIcon sx={{ mr: 1 }} />
+Use current location
+</Fab></>:<></>
 }
+
+</div>
+
     </div>
   );
 }

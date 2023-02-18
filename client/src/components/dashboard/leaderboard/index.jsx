@@ -7,17 +7,11 @@ export default function Leaderboard() {
   const [Leaderboard, setLeaderboard] = React.useState([])
 
 
-
-
-
   async function getleaderboard() {
     let leaderboard_data = await leaderboard()
     setLeaderboard(leaderboard_data)
 
   }
-
-
-
 
 
   return (

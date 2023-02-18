@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState,useEffect} from 'react'
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,8 +13,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { height } from '@mui/system';
 import { useNavigate } from "react-router-dom";
-
-
+import MenuIcon from '@mui/icons-material/Menu';
+import Drawer from '@mui/material/Drawer';
+import Link from '@mui/material/Link';
+// import "./navbar.css"
 
 const pages = ['Rewards', 'Location', 'Leaderboard'];
 const pagesLink = ['/rewards', '/dashboard/location', '/dashboard/leaderboard'];
@@ -26,11 +28,30 @@ const settingsLink = ['/account', '/logout'];
 export default function Nav() {
 
     const navigate = useNavigate();
+    const [state, setState] = useState({
+      mobileView: false,
+      drawerOpen: false
+    });
+  const { mobileView, drawerOpen } = state;
+
+    useEffect(() => {
+      const setResponsiveness = () => {
+        return window.innerWidth < 900
+          ? setState((prevState) => ({ ...prevState, mobileView: true }))
+          : setState((prevState) => ({ ...prevState, mobileView: false }));
+      };
+  
+      setResponsiveness();
+      window.addEventListener("resize", () => setResponsiveness());
+  
+      return () => {
+        window.removeEventListener("resize", () => setResponsiveness());
+      }
+    }, []);
 
 
-
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
   
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -56,12 +77,83 @@ export default function Nav() {
       const index = settings.indexOf(page);
       navigate(settingsLink[index]);
     }
-  
-  
+    const handleDrawerOpen = () =>
+    setState((prevState) => ({ ...prevState, drawerOpen: true }));
+    const handleDrawerClose = () =>
+    setState((prevState) => ({ ...prevState, drawerOpen: false }));
+
+    const getDrawerChoices = () => {
+        return (
+          <Box sx={{ flexGrow: 1,alignItems: 'center' }}>
+                {pages.map((page) => (
+                  <Button
+                    key={page}
+                    onClick={redirect(page)}
+                    sx={{ my: 2, color: 'black', display: 'block',flexGrow:1 }}
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </Box>
+
+        );
+    };
+
+
       return (
         <AppBar position="static" style={{backgroundColor : "black"}}>
-          <Container maxWidth="x1">
-            <Toolbar disableGutters>
+
+<Container maxWidth="x1">
+{mobileView? 
+        <>
+        <Toolbar>
+        <IconButton
+          {...{
+            edge: "start",
+            color: "inherit",
+            "aria-label": "menu",
+            "aria-haspopup": "true",
+            onClick: handleDrawerOpen
+
+          }}
+        >
+          <MenuIcon />
+        </IconButton >
+        <Drawer
+        sx = {{ width:'20%'}}
+          {...{
+            anchor: "left",
+            open: drawerOpen,
+            onClose: handleDrawerClose,
+          }}
+        >
+          <div>{getDrawerChoices()}</div>
+        </Drawer>
+        <div>
+        <button 
+                style={
+                  {
+                    backgroundColor: "black",
+                    border: "none",
+                    color: "white",
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    letterSpacing: '.3rem',
+                    textDecoration: 'none',
+                    fontSize: "30px",
+                    cursor: "pointer"
+                  }   
+                }
+              onClick={
+                () => navigate("/dashboard")
+
+              }>LOGO</button>
+
+        </div>
+</Toolbar>
+        
+        </>:<>
+        <Toolbar disableGutters>
               <button 
                 style={
                   {
@@ -80,23 +172,6 @@ export default function Nav() {
                 () => navigate("/dashboard")
 
               }>LOGO</button>
-              {/* <Typography
-                variant="h6"
-                noWrap
-
-                component="a"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                LOGO
-              </Typography> */}
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
                   <Button
@@ -112,7 +187,7 @@ export default function Nav() {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar src="/static/images/avatar/2.jpg" />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -139,6 +214,13 @@ export default function Nav() {
                 </Menu>
               </Box>
             </Toolbar>
+        
+        
+        </>
+        }
+
+
+
           </Container>
         </AppBar>
       );

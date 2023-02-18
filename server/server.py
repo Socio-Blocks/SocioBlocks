@@ -8,12 +8,32 @@ import base64
 import pygame
 from io import BytesIO
 import cv2
+from pinatapy import PinataPy
+import requests
+
+
+pinata_api_key = "eac222c6682ef06e91f8"
+pinata_secret_api_key = "09e5e8d1c6ff279ce8ccb581a440bbe6764ec18dc7ed7302a5bce666e62b9ad6"
 
 x = datetime.datetime.now()
 
 # Initializing flask app
 app = Flask(__name__)
 CORS(app)
+
+def uploader(filename):
+    pinata = PinataPy(pinata_api_key, pinata_secret_api_key)
+    response = pinata.pin_file_to_ipfs(filename+'.jpg')
+    return response['IpfsHash']
+
+
+def retriever(hashh,filename):
+    url = "https://ipfs.io/ipfs/"+hashh
+    img_data = requests.get(url).content
+    with open(filename+'.jpg', 'wb') as writer:
+        writer.write(img_data)
+
+
 
 def get_image(file_location):
     img = cv2.imread(file_location)
@@ -41,8 +61,12 @@ def image():
     im_dat = np.array([get_image(f"./output.jpg")])
     op = model.predict(im_dat)
     op = op[0][0]
-    if(np.argmax(op) == 1):
+    print(op)
+    if(np.argmax(op) == 0):
         print("Pothole")
+        file = "output"
+        a = uploader(file)
+        print(a)
         return 'Success'
     else:
         print("No Pothole")
@@ -50,31 +74,25 @@ def image():
 	# Returning an api for showing in reactjs
     return 'Failed'
 
-	
+
+@app.route('/api/reciveimg', methods=['POST'])
+def reciveimg():
+    b = input("enter file name: ")
+    retriever(a,b)
+
+
+
 # # Running app
 if __name__ == '__main__':
 	app.run(debug=True, host='localhost', port=5000)
 
-# from flask import Flask
-# import datetime
-# app = Flask(__name__)
-
-# #allow cors 
-# from flask_cors import CORS
-# CORS(app)
-# x = datetime.datetime.now()
-
-# @app.route('/api/pothole',methods = ['POST'])
-# def image():
-#     print("Hello World")
-#     return {
-# 		'Name':"geek",
-# 		"Age":"22",
-# 		"Date":x,
-# 		"programming":"python"
-# 		}
 
 
 
-# if __name__ == "__main__":
-#     app.run(debug=True, host='localhost', port=5000)
+
+
+
+
+
+
+
