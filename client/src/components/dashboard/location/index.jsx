@@ -23,7 +23,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
   }, [lat, lng]);
 
   const setgpscords = () => {
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       function (position) {
         setLat(position.coords.latitude);
         setLng(position.coords.longitude);
@@ -36,7 +36,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
 
 
   const takecords = async () => {
-    await axios.post("http://localhost:5001/api/fence", {
+    await axios.post("https://511e-122-50-208-12.in.ngrok.io/api/fence", {
       lat: lat,
       lng: lng,
     }).then(function (response) {

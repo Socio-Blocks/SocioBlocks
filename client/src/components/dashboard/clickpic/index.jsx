@@ -43,12 +43,12 @@ export default function Clickpic(props) {
 
   async function  onCapture(dataUri) {
     setDataUri(dataUri);
-    var res = await axios.post("http://localhost:5000/api/pothole", {
+    var res = await axios.post("https://32cf-2406-7400-73-e557-c8e4-3f24-69e4-a4d0.in.ngrok.io/api/pothole", {
         image: dataUri
       })
       .then(function (response) {
         console.log(response);
-        if(response.data === "success"){
+        if(response.data === "Success"){
           //call blockchain function
           props.setIscorrectimg(true)
           navigate("/dashboard/location");
