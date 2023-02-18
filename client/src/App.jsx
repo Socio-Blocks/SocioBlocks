@@ -9,6 +9,9 @@ import Reward from "./components/reward";
 import Maps from "./components/dashboard/location"
 import Nav from "./components/navbar";
 import Landing from "./components/landing";
+import Account from "./components/account";
+import Logout from "./components/logout";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -50,7 +53,9 @@ function App() {
         <Route path="/dashboard/leaderboard" element={<Leaderboard />}/>
         <Route path="/dashboard/clickpicture" element={<Clickpic auth={auth} walletAddress={walletAddress} setCoin={setCoin}/>}/>
         <Route path="/rewards" element={<Reward coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
-        <Route path="/dashboard/location" element={<Maps setCoords={setCoords} auth={auth}/>} />
+        <Route path="/dashboard/location" element={<Maps setCoords={setCoords} auth={auth} walletAddress={walletAddress} setCoin={setCoin}/>} />
+        <Route path="/Account" element={<Account auth={auth} walletAddress={walletAddress}/>}/>
+        <Route path="/logout" element={<Logout auth={auth}/>}/>
       </Routes>
     </div>
   </Router>
