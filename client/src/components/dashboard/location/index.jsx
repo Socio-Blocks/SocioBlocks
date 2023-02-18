@@ -1,10 +1,11 @@
 import React, { useEffect,useState } from "react";
 import MapmyIndia from "mapmyindia-react";
-
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Nav from "../../navbar";
+import {sendCoinParams,execute_function,setCheckParams} from "../../../test.js"
 
-export default function Maps({ setCoords,auth }) {
+export default function Maps({ setCoords,auth,walletAddress,setCoin }) {
   
   const navigate = useNavigate();
   // useEffect(() => {
@@ -33,6 +34,33 @@ export default function Maps({ setCoords,auth }) {
     );
   };
 
+
+  const takecords = async () => {
+    await axios.post("http://localhost:5001/api/fence", {
+      lat: lat,
+      lng: lng,
+    }).then(function (response) {
+      console.log(response);
+      if (response.data.status === "outside geofence") {
+        setStatus("coordinates are valid");
+        sendCoinParams(walletAddress,1,response.data.geofence_id,10)
+        setCoin(2)
+        execute_function("addreporter")
+      } else {
+        setStatus("coordinates are invalid");
+        setCheckParams(response.data.geofence_id,walletAddress)
+        execute_function("check")
+      }
+    });
+    setCoords({
+      lat: lat,
+      lng: lng,
+    });
+    
+
+    navigate("/rewards");
+  };
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       function (position) {
@@ -53,15 +81,12 @@ export default function Maps({ setCoords,auth }) {
         markers={[
           {
             position: [lat, lng],
-            draggable: true,
+            draggable: false,
             title: "Your location",
             onClick: (e) => {
               console.log("clicked ");
             },
             onDragend: (e) => {
-              setStatus(
-                "You have moved the pin, your reward will be calculated accordingly"
-              );
               setLat(e.target._latlng.lat);
               setLng(e.target._latlng.lng);
             },
@@ -72,25 +97,17 @@ export default function Maps({ setCoords,auth }) {
       <div>
         Your cordinates are {lat} and {lng}
       </div>
-      <div>
-        if u think its wrong then move the pin to the appropriate location
-      </div>
       <div>{status}</div>
       <button
         onClick={() => {
           setgpscords();
-          window.location.reload(false);
         }}
       >
         Use GPS
       </button>
       <button
         onClick={() => {
-          setCoords({
-            lat: lat,
-            lng: lng,
-          });
-          navigate("/dashboard/clickpicture");
+          takecords();
         }}
       >
         Use Coordinates

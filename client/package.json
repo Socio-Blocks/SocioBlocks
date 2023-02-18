@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "proxy":"http://localhost:5000/",
   "dependencies": {
     "@arcana/auth": "^1.0.1",
     "@arcana/auth-react": "0.0.3",

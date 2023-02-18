@@ -18,8 +18,8 @@ import { useNavigate } from "react-router-dom";
 
 const pages = ['Rewards', 'Location', 'Leaderboard'];
 const pagesLink = ['/rewards', '/dashboard/location', '/dashboard/leaderboard'];
-const settings = ['Profile', 'Account', 'Logout'];
-const settingsLink = ['/dashboard/profile', '/dashboard/account', '/dashboard/logout'];
+const settings = ['Account', 'Logout'];
+const settingsLink = ['/account', '/logout'];
 
 
 

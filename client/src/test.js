@@ -543,7 +543,7 @@ let contractABI = [
 ]
 
 var data_7;
-
+var data_2
 let contract = new Web3js.eth.Contract(contractABI, tokenAddress, { from: fromAddress })
 // let amount = Web3js.utils.toHex(Web3js.utils.toWei("1")); //1 DEMO Token
 let amount = 1;
@@ -554,7 +554,6 @@ let intensity = 10;
 
 let data_1=contract.methods.balanceOf(wallet_address).encodeABI()
 
-let data_2=contract.methods.checker(geofence_id,wallet_address).encodeABI()
 
 let data_3=contract.methods.getTopReporters().encodeABI()
 
@@ -562,6 +561,11 @@ let data_4=contract.methods.paying_integer(wallet_address,to_address,amount).enc
 let data_5=contract.methods.paying_one_decimal(wallet_address,to_address,amount).encodeABI()
 let data_6=contract.methods.paying_two_decimal(wallet_address,to_address,amount).encodeABI()
 
+
+
+export function setCheckParams(geofence_id,wallet_address){
+	 data_2=contract.methods.checker(geofence_id,wallet_address).encodeABI()
+}
 
 export function sendCoinParams(wallet_address,pothole_id, geofence_id, intensity){
 	data_7 = contract.methods.addreporter(wallet_address,pothole_id, geofence_id, intensity).encodeABI()

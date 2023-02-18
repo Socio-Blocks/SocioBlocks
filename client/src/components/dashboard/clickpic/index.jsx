@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Nav from "../../navbar";
 
-import {sendCoinParams,execute_function} from "../../../test.js"
 
 export default function Clickpic(props) {
   const navigate = useNavigate();
@@ -51,10 +50,7 @@ export default function Clickpic(props) {
         console.log(response);
         if(response.data === "success"){
           //call blockchain function
-          sendCoinParams(props.walletAddress,1,2,10)
-          props.setCoin(2)
-          execute_function("addreporter")
-          navigate("/rewards");
+          navigate("/dashboard/location");
         }
       })
   }
