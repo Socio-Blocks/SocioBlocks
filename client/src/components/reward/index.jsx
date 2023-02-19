@@ -5,13 +5,14 @@ import { get_balance, get_hash } from "../../test.js";
 import { MODEL_URL } from "../../constants";
 import Zoom from "@mui/material/Zoom";
 import Skeleton from "@mui/material/Skeleton";
+import styled from "styled-components";
+import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import "./style.css"
+
 // import "./style.css"
 import axios from "axios";
-import Typography from "@mui/material/Typography";
-
-
 
 const style = {
   position: 'absolute',
@@ -35,7 +36,9 @@ const Unstable = React.memo(function Reward({
   setHashArray,
   status,
   setCoin,
-}) {
+})
+
+{
   const [show, setShow] = React.useState(false);
   useEffect(() => {
     // setHashArray([]);
@@ -43,7 +46,7 @@ const Unstable = React.memo(function Reward({
     const getbalance = async () => {
       let balance_data = await get_balance(walletAddress);
       setBalance(balance_data);
-      console.log(balance_data);
+
       const hash_data = await get_hash(walletAddress);
       var link_arr = [];
       axios
@@ -60,18 +63,17 @@ const Unstable = React.memo(function Reward({
     };
     getbalance();
   }, []);
-
   const handleClose = () => setCoin(false);
-
   const navigate = useNavigate();
   useEffect(() => {
     if (!auth.isLoggedIn) {
       navigate("/");
     }
   }, []);
+
   return (
     <div>
-      <Modal
+        <Modal
         open={coin}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -87,17 +89,23 @@ const Unstable = React.memo(function Reward({
         </Box>
       </Modal>
       <Nav />
-      <Typography
-        style={{
+      <h3 style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-        }}
-      >
+          fontFamily: "Roboto",
+        }}>
+      {status}</h3>
+      <div class="buttons">
+      <button class="btn-hover color-9">
         Your total balance adds up to{" "}
-        {parseInt(parseInt(balance) / parseFloat(1000000000000000000n)) + parseInt(coin?2:0 )}  SC
-      </Typography>
+        <span class="amount">{parseInt(balance) / parseFloat(1000000000000000000) + coin} SC</span></button>
+      </div>
       <div>
+      {show ? (
+      <div>Your recent clicks</div>)
+      :<></>
+      }
         <div
           style={{
             display: "flex",
@@ -107,6 +115,7 @@ const Unstable = React.memo(function Reward({
           }}
         >
           {show ? (
+
             hashArray.map((item, index) => {
               return (
                 <Zoom
@@ -126,6 +135,7 @@ const Unstable = React.memo(function Reward({
               );
             })
           ) : (
+            <>
             <>
               <Skeleton
                 variant="rectangular"
@@ -187,6 +197,7 @@ const Unstable = React.memo(function Reward({
                 height={200}
                 sx={{ margin: "2em" }}
               />
+            </>
             </>
           )}
         </div>
