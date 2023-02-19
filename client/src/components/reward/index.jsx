@@ -35,7 +35,8 @@ const Unstable = React.memo(function Reward({
   hashArray,
   setHashArray,
   status,
-  showModal
+  showModal,
+  setShowModal
 })
 
 {
@@ -80,6 +81,7 @@ const Unstable = React.memo(function Reward({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <Image src="./coin.gif" alt="Coin" />
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Thank you for reporting the pothole, we will take care of it soon.
           </Typography>
@@ -89,13 +91,13 @@ const Unstable = React.memo(function Reward({
         </Box>
       </Modal>
       <Nav />
-      <h3 style={{
+      {/* <h3 style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           fontFamily: "Roboto",
         }}>
-      {status}</h3>
+      {status}</h3> */}
       <div class="buttons">
       <button class="btn-hover color-9">
         Your total balance adds up to{" "}
@@ -103,7 +105,14 @@ const Unstable = React.memo(function Reward({
       </div>
       <div>
       {show ? (
-      <div>Your recent clicks</div>)
+      <h2 style={{
+        display: "flex",
+        fontFamily: "Roboto",
+        backgroundColor: "black",
+        color: "white",
+        width: '100vw',
+        padding:'2em'
+      }}>Your recent clicks</h2>)
       :<></>
       }
         <div

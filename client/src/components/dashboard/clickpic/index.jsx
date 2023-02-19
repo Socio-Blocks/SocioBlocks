@@ -119,8 +119,6 @@ export default function Clickpic(props) {
       )
       
       }
-
-
         <button
           style={{
             padding: "10px",
@@ -128,7 +126,7 @@ export default function Clickpic(props) {
             marginLeft: "10px",
             backgroundColor: "#f44336",
             color: "white",
-            border: "none"
+            border: "none",
           }} onClick={() => {cameraClosed()}}>
           Close Camera
         </button>

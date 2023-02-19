@@ -20,7 +20,7 @@ import Link from '@mui/material/Link';
 
 const pages = ['Rewards', 'Location', 'Leaderboard'];
 const pagesLink = ['/rewards', '/dashboard/location', '/dashboard/leaderboard'];
-const settings = ['Account', 'Logout'];
+const settings = ['Logout'];
 const settingsLink = ['/account', '/logout'];
 
 
