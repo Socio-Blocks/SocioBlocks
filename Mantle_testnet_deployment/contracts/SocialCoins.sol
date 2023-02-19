@@ -30,6 +30,7 @@ contract SocialCoins is ERC20{
 
     constructor() ERC20("SocialCoins", "SC"){
         _mint(address(this),1000000*10**18);
+        //state the amount you want to want can be custom.
     }
 
     function transferTokens(address recipient, uint256 amount) public returns (bool) {
