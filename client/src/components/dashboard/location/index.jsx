@@ -21,6 +21,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
       if (!auth.isLoggedIn) {
         navigate("/Authentication");
       }
+      setCoin(false)
     },[])
   const [lat, setLat] = React.useState(0);
   const [lng, setLng] = React.useState(0);

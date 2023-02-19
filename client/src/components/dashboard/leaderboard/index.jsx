@@ -5,8 +5,13 @@ import Nav from "../../navbar/index.jsx";
 import CachedIcon from '@mui/icons-material/Cached';
 import "./style.css"
 
-export default function Leaderboard() {
+export default function Leaderboard({setCoin}) {
   const [Leaderboard, setLeaderboard] = React.useState([]);
+
+  React.useEffect(() => {
+    setCoin(false)
+  },[])
+
 
   async function getleaderboard() {
     let leaderboard_data = await leaderboard();

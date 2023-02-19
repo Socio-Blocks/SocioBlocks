@@ -56,13 +56,13 @@ function App() {
     <div>
       <Routes>
         <Route path="/Authentication" element={<Authentication auth = {auth}/>}/>
-        <Route path="/" element={<Dashboard auth={auth} setWalletAddress={setWalletAddress}/>}/>
-        <Route path="/dashboard" element={<Dashboard auth={auth}/>}/>
-        <Route path="/dashboard/leaderboard" element={<Leaderboard  />}/>
-        <Route path="/dashboard/clickpicture" element={<Clickpic auth={auth} walletAddress={walletAddress}  setIscorrectimg={setIscorrectimg} setHash={setHash}/>}/>
-        <Route path="/rewards" element={<Unstable showModal={showModal} setShowModal={setShowModal} setCoin={setCoin} status={status} hashArray={hashArray}setHashArray={setHashArray}coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
-        <Route path="/dashboard/location" element={<Maps setShowModal={setShowModal} setStatus={setStatus} setCoords={setCoords} auth={auth} walletAddress={walletAddress} setCoin={setCoin} iscorrectimg={iscorrectimg} setIscorrectimg={setIscorrectimg} hash={hash}/>} />
-        <Route path="/Account" element={<Account auth={auth} walletAddress={walletAddress}/>}/>
+        <Route path="/" element={<Dashboard setCoin={setCoin} auth={auth} setWalletAddress={setWalletAddress}/>}/>
+        <Route path="/dashboard" element={<Dashboard setCoin={setCoin} auth={auth} setWalletAddress={setWalletAddress}/>}/>
+        <Route path="/dashboard/leaderboard" element={<Leaderboard setCoin={setCoin} />}/>
+        <Route path="/dashboard/clickpicture" element={<Clickpic setCoin={setCoin} auth={auth} walletAddress={walletAddress}  setIscorrectimg={setIscorrectimg} setHash={setHash}/>}/>
+        <Route path="/rewards" element={<Unstable setCoin={setCoin} showModal={showModal} setShowModal={setShowModal}  status={status} hashArray={hashArray}setHashArray={setHashArray}coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
+        <Route path="/dashboard/location" element={<Maps setCoin={setCoin} setShowModal={setShowModal} setStatus={setStatus} setCoords={setCoords} auth={auth} walletAddress={walletAddress}  iscorrectimg={iscorrectimg} setIscorrectimg={setIscorrectimg} hash={hash}/>} />
+        <Route path="/Account" element={<Account  auth={auth} walletAddress={walletAddress}/>}/>
         <Route path="/logout" element={<Logout auth={auth}/>}/>
       </Routes>
     </div>

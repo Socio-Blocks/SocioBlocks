@@ -5,7 +5,7 @@ import Nav from "../navbar";
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
-export default function Dashboard({auth,setWalletAddress}) {
+export default function Dashboard({auth,setWalletAddress,setCoin}) {
 
 
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ export default function Dashboard({auth,setWalletAddress}) {
       if (!auth.isLoggedIn) {
         navigate("/Authentication");
       }
+      setCoin(false)
     },[])
 
     return (

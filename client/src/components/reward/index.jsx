@@ -42,6 +42,10 @@ const Unstable = React.memo(function Reward({
 {
   const [show, setShow] = React.useState(false);
   useEffect(() => {
+
+    console.log("HELL NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+ parseInt(balance) / parseFloat(1000000000000000000) + parseInt(coin? 2:0));
+
+
     // setHashArray([]);
     const getbalance = async () => {
       let balance_data = await get_balance(walletAddress);
@@ -79,7 +83,7 @@ const Unstable = React.memo(function Reward({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Image src="./coin.gif" alt="Coin" />
+          {/* <Image src="./coin.gif" alt="Coin" /> */}
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Thank you for reporting the pothole, we will take care of it soon.
           </Typography>

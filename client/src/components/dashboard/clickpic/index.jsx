@@ -14,6 +14,7 @@ export default function Clickpic(props) {
       if (!props.auth.isLoggedIn) {
         navigate("/Authentication");
       }
+      props.setCoin(false)
     },[])
   const [dataUri, setDataUri] = React.useState("");
 
