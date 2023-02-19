@@ -107,7 +107,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
         markers={[
           {
             position: [lat, lng],
-            draggable: true,
+            draggable: false,
             title: "Your location",
             onClick: (e) => {
               console.log("clicked ");
@@ -123,9 +123,11 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
 <div style={{height:"100%",display:"flex",alignItems:"center",flexDirection:"column",margin:"1em"}}>
 
 {/* your coordinates: {lat}, {lng} */}
-<Card sx={{ maxWidth: 700,margin: "2em",display:"flex",flexDirection:"row"}}>
+<Card sx={{ maxWidth: 700,margin: "2em",display:"flex",flexDirection:"row" }}>
       <CardMedia
-        sx={{ width: 300 }}
+        sx={{ width: 300, "@media (max-width: 600px)": {
+          display:"none",
+        } }}
         src={nav}
         title="Your address"
       >
@@ -134,7 +136,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
         <Typography gutterBottom variant="h5" component="div">
           Address
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" >
           {address.formatted_address}
         </Typography>
       </CardContent>

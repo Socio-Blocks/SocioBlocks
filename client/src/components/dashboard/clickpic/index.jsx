@@ -139,7 +139,6 @@ export default function Clickpic(props) {
             />
             <div
               style={{
-                marginTop: "-5px",
                 textAlign: "center",
                 fontSize: "18px",
                 marginTop: "2em",

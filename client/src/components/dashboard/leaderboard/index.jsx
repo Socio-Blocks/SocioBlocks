@@ -19,7 +19,7 @@ export default function Leaderboard({setCoin}) {
   }
 
   return (
-    <div>
+    <div >
       <Nav />
       <div class="ldcont">
       <button class="getld" onClick={getleaderboard}>Get Live Leaderboard<CachedIcon style={{marginLeft:"0.5em",marginBottom:"-0.2em"}}fontSize="medium"/></button>
@@ -34,21 +34,22 @@ export default function Leaderboard({setCoin}) {
           </nav>
           {Leaderboard ? (
             <>
-              <table id="rankings" class="leaderboard-results" width="100%">
+              <table id="rankings" class="table table-no-more"  style={{ width: "100%"
+    }}>
                 <thead>
                   <tr>{/*style={{ display: "flex",justifyContent: "space-evenly" }}>*/}
                     <th>Address</th>
-                    <th>Potholes detected</th>
+                    <th style={{wordWrap: "break-word"}}>Potholes detected</th>
                   </tr>
                 </thead>
                 <tbody>
                   {Leaderboard.map((item, index) => {
                     return (
                       <tr key={index} >
-                        <td style={{ margin: "10px" }}>
+                        <td style={{ margin: "10px",wordWrap: "break-word"}}>
                           {item["reporter_adress"]}
                         </td>
-                        <td style={{ margin: "10px" }}>{item["score"]}</td>
+                        <td style={{ margin: "10px", textAlign: "right" }}>{item["score"]}</td>
                       </tr>
                     );
                   })}

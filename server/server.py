@@ -98,7 +98,7 @@ def reciveimg():
     url = []
     print(x['hash'])
     for i in x['hash']:
-        sleep(0.2)
+        sleep(1)
         url.append(retriever(i,b))
     # return url
     return jsonify(url)
