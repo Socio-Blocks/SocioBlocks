@@ -6,7 +6,7 @@
 .amount{
     background-image: linear-gradient(to right, #040404, #000000, #000000, #000000);
     box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
-    padding: 0.5em 0.5em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
 .btn-hover {

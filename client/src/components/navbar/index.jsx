@@ -133,6 +133,8 @@ export default function Nav() {
         <button 
                 style={
                   {
+                    width: "50px",
+                    height: "50px",
                     backgroundColor: "black",
                     border: "none",
                     color: "white",
@@ -141,13 +143,16 @@ export default function Nav() {
                     letterSpacing: '.3rem',
                     textDecoration: 'none',
                     fontSize: "30px",
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    objectFit: "cover",
+                    overflow: "hidden",
+                    backgroundImage: `url("https://imageupscaler.com/UploadedFiles/63f1f9f0361796.61445084Processed.png")`
                   }   
                 }
               onClick={
                 () => navigate("/dashboard")
 
-              }>LOGO</button>
+              }></button>
 
         </div>
 </Toolbar>
@@ -157,6 +162,8 @@ export default function Nav() {
               <button 
                 style={
                   {
+                    width: "50px",
+                    height: "50px",
                     backgroundColor: "black",
                     border: "none",
                     color: "white",
@@ -165,13 +172,16 @@ export default function Nav() {
                     letterSpacing: '.3rem',
                     textDecoration: 'none',
                     fontSize: "30px",
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    objectFit: "cover",
+                    overflow: "hidden",
+                    backgroundImage: `url("https://imageupscaler.com/UploadedFiles/63f1f9f0361796.61445084Processed.png")`
                   }   
                 }
               onClick={
                 () => navigate("/dashboard")
 
-              }>LOGO</button>
+              }></button>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
                   <Button
