@@ -719,6 +719,12 @@ export function leaderboard() {
 	  });
 	});
   }
+
+  get_balance(wallet_address).then((result) => {
+	console.log(result);
+	  }).catch((error) => {
+	console.log(error);
+	  });
   
 
 export function get_hash(wallet_address) {

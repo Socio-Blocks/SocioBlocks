@@ -1,6 +1,6 @@
 import { Auth, useAuth } from "@arcana/auth-react";
 import { AuthProvider } from '@arcana/auth' // From npm
-import React ,{ useEffect } from "react";
+import React ,{ useEffect,useState } from "react";
 import  Authentication  from "./components/auth"; 
 import Dashboard from "./components/dashboard";
 import Leaderboard from "./components/dashboard/leaderboard";
@@ -21,19 +21,19 @@ import {
 
 
 function App() {
-  const [coin, setCoin] = React.useState(0);
-  const [balance, setBalance] = React.useState(0);
-  const [walletAddress, setWalletAddress] = React.useState(0);
+  const [coin, setCoin] = useState(false);
+  const [balance, setBalance] = useState(0);
+  const [walletAddress, setWalletAddress] = useState(0);
   const auth = useAuth();
-  const [coords, setCoords] = React.useState({
+  const [coords, setCoords] = useState({
     lat: 0,
     lng: 0
   });
-  const [iscorrectimg, setIscorrectimg] = React.useState(false);
-  const [hash, setHash] = React.useState("");
-  const [hashArray, setHashArray] = React.useState([]);
+  const [iscorrectimg, setIscorrectimg] = useState(false);
+  const [hash, setHash] = useState("");
+  const [hashArray, setHashArray] = useState([]);
   
-  const [status, setStatus] = React.useState("");
+  const [status, setStatus] = useState("");
   useEffect(() => {
     console.log(auth);
 
@@ -55,8 +55,8 @@ function App() {
         <Route path="/" element={<Dashboard auth={auth} setWalletAddress={setWalletAddress}/>}/>
         <Route path="/dashboard" element={<Dashboard auth={auth}/>}/>
         <Route path="/dashboard/leaderboard" element={<Leaderboard  />}/>
-        <Route path="/dashboard/clickpicture" element={<Clickpic auth={auth} walletAddress={walletAddress} setCoin={setCoin} setIscorrectimg={setIscorrectimg} setHash={setHash}/>}/>
-        <Route path="/rewards" element={<Unstable status={status} hashArray={hashArray}setHashArray={setHashArray}coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
+        <Route path="/dashboard/clickpicture" element={<Clickpic auth={auth} walletAddress={walletAddress}  setIscorrectimg={setIscorrectimg} setHash={setHash}/>}/>
+        <Route path="/rewards" element={<Unstable setCoin={setCoin} status={status} hashArray={hashArray}setHashArray={setHashArray}coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
         <Route path="/dashboard/location" element={<Maps setStatus={setStatus} setCoords={setCoords} auth={auth} walletAddress={walletAddress} setCoin={setCoin} iscorrectimg={iscorrectimg} setIscorrectimg={setIscorrectimg} hash={hash}/>} />
         <Route path="/Account" element={<Account auth={auth} walletAddress={walletAddress}/>}/>
         <Route path="/logout" element={<Logout auth={auth}/>}/>

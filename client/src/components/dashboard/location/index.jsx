@@ -31,7 +31,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
     var did10 = await checker_10()
     if(did10 == "Success"){
       setStatus("Congratulations you have earned 2 coins");
-      setCoin(2)
+      setCoin(true)
     }else{
       setStatus("Sorry! the same location has been reported before");
     }
@@ -48,7 +48,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
       if (response.data.status === "outside geofence") {
         setStatus("Congratulations you have earned 2 coins");
         sendCoinParams(walletAddress,1,response.data.geofence_id,10,hash)
-        setCoin(2)
+        setCoin(true)
         execute_function("addreporter")
         setIscorrectimg(false)
       } else {

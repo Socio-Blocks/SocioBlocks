@@ -5,19 +5,36 @@ import { get_balance, get_hash } from "../../test.js";
 import { MODEL_URL } from "../../constants";
 import Zoom from "@mui/material/Zoom";
 import Skeleton from "@mui/material/Skeleton";
-
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 // import "./style.css"
 import axios from "axios";
+import Typography from "@mui/material/Typography";
+
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const Unstable = React.memo(function Reward({
-  coin = 0,
+  coin,
   balance = 0,
   setBalance,
   auth,
   walletAddress,
   hashArray,
   setHashArray,
-  status
+  status,
+  setCoin,
 }) {
   const [show, setShow] = React.useState(false);
   useEffect(() => {
@@ -26,7 +43,7 @@ const Unstable = React.memo(function Reward({
     const getbalance = async () => {
       let balance_data = await get_balance(walletAddress);
       setBalance(balance_data);
-
+      console.log(balance_data);
       const hash_data = await get_hash(walletAddress);
       var link_arr = [];
       axios
@@ -44,6 +61,8 @@ const Unstable = React.memo(function Reward({
     getbalance();
   }, []);
 
+  const handleClose = () => setCoin(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     if (!auth.isLoggedIn) {
@@ -52,47 +71,125 @@ const Unstable = React.memo(function Reward({
   }, []);
   return (
     <div>
+      <Modal
+        open={coin}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Thank you for reporting the pothole, we will take care of it soon.
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {status}
+          </Typography>
+        </Box>
+      </Modal>
       <Nav />
-      <h3>{status}</h3>
-      <h2 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <Typography
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         Your total balance adds up to{" "}
-        {parseInt(balance) / parseFloat(1000000000000000000) + coin} SC
-      </h2>
+        {parseInt(parseInt(balance) / parseFloat(1000000000000000000n)) + parseInt(coin?2:0 )}  SC
+      </Typography>
       <div>
-      <div style={{ display: "flex",flexDirection:"row",alignItems:"center",flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
           {show ? (
             hashArray.map((item, index) => {
               return (
-                
-                  <Zoom
-                    key={index}
-                    in={show}
-                    style={{
-                      transitionDelay: show ? `${500 * index}ms` : "0ms",margin:"2em"
-                    }}
-                  >
-                    <img
-                      src={item}
-                      alt="img"
-                      style={{ aspectRatio: 1, width:300, height:200 }}
-                    />
-                  </Zoom>
+                <Zoom
+                  key={index}
+                  in={show}
+                  style={{
+                    transitionDelay: show ? `${500 * index}ms` : "0ms",
+                    margin: "2em",
+                  }}
+                >
+                  <img
+                    src={item}
+                    alt="img"
+                    style={{ aspectRatio: 1, width: 300, height: 200 }}
+                  />
+                </Zoom>
               );
             })
-          ) : (<>
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
-            <Skeleton variant="rectangular" width={300} height={200} sx={{margin:"2em"}}  />
+          ) : (
+            <>
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                width={300}
+                height={200}
+                sx={{ margin: "2em" }}
+              />
             </>
           )}
-         </div>
+        </div>
       </div>
     </div>
   );
