@@ -1,7 +1,6 @@
 pragma solidity >=0.5.0 < 0.9.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol";
 
 struct reporter_data{
 
@@ -12,14 +11,14 @@ struct reporter_data{
         uint date;
 
     }
-    struct reporter_score{
+   struct reporter_score{
         address reporter_adress;
         uint score;
 
     }
 
-contract Social is ERC20{
-    using SafeMath for uint256;
+contract SocialCoins is ERC20{
+    mapping(address => string[]) mapped_user_hashes;
     reporter_score[] public reporters;
     mapping(address => reporter_data) mapped_reporter;
     mapping(uint => uint) mapped_geofence_date;
@@ -38,8 +37,9 @@ contract Social is ERC20{
          _transfer(address(this), recipient, amnt);
         return true;
     }
-    function addreporter(address wallet_adress, uint pothole, uint geofence, uint intensity) public returns(string memory){
+    function addreporter(address wallet_adress, uint pothole, uint geofence, uint intensity,string memory hash) public returns(string memory){
         reporter_data memory reporter = reporter_data(wallet_adress,pothole,geofence, intensity, block.timestamp);
+        mapped_user_hashes[wallet_adress].push(hash);
         string memory updation = "data added tokens transfered..";
         mapped_reporter[wallet_adress]=reporter;
         mapped_geofence_date[geofence]=reporter.date;
@@ -61,18 +61,17 @@ contract Social is ERC20{
     function get_data(address wallet_id) public view returns(uint){
         return mapped_reporter[wallet_id].date;
     }
-    function checker(uint gefnce, address wallet_holder) public  returns(string memory){
+    function checker(uint gefnce, address wallet_holder, string memory hash) public  returns(string memory){
         string memory status;
         uint256 recorded_date = mapped_geofence_date[gefnce];
         uint256 diff = block.timestamp - recorded_date;
         if (recorded_date == 0){
             status = "there is no such geofence id present";
-
         }
-        else{
-            if(diff>=ten_days_seconds){
+        else if(diff>=ten_days_seconds){
             status = "congrats nigga tht pothole is old ull get coins";
             transferTokens(wallet_holder,default_token_amnt);
+            mapped_user_hashes[wallet_holder].push(hash);
              bool reporterExists = false;
              for (uint i = 0; i < reporters.length; i++) {
                  if (reporters[i].reporter_adress == wallet_holder) {
@@ -81,17 +80,29 @@ contract Social is ERC20{
                        break;
         }
     }
-    if (!reporterExists) {
-        reporters.push(reporter_score(wallet_holder, 1));
-    }
+                     if (!reporterExists) {
+                          reporters.push(reporter_score(wallet_holder, 1));
+                 }
         }
         else if (diff<ten_days_seconds){
             status = "no you wont get the coins bro byee..";
         }
-        }
+        
         return status;
     }
-    
+    function checker_10(uint gefnce) public view returns(string memory){
+        string memory status;
+        uint256 recorded_date = mapped_geofence_date[gefnce];
+        uint256 diff = block.timestamp - recorded_date;
+        if (recorded_date < ten_days_seconds ){
+            status = "Alreday reported nigga";
+        }
+        else if(diff>=ten_days_seconds){
+            status = "congrats nigga tht pothole is old ull get coins";
+            }
+        return status;
+    }
+
     function getTopReporters() public view returns (reporter_score[10] memory) {
     reporter_score[] memory sortedReporters = reporters;
     for (uint i = 0; i < sortedReporters.length - 1; i++) {
@@ -130,5 +141,16 @@ contract Social is ERC20{
         return balanceOf(wallet);
     }
 
+    function getScore(address wallet_address) public view returns (uint) {
+    for (uint i = 0; i < reporters.length; i++) {
+        if (reporters[i].reporter_adress == wallet_address) {
+            return reporters[i].score;
+        }
+    }
+    revert("Address not found");
+}
+    function hash_returner(address reporter_adress) public view returns(string[] memory) {
+        return mapped_user_hashes[reporter_adress];
+    }
     
 }
