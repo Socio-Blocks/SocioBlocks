@@ -1,0 +1,57 @@
+
+body{
+    overflow-x: hidden; /* Hide vertical scrollbar */
+}
+
+
+.buttons {
+    margin: 2vh;
+    text-align: center;
+}
+.amount{
+    background-image: linear-gradient(to right, #040404, #000000, #000000, #000000);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.btn-hover {
+    width: 30vw;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+.btn-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+    /* padding: 10!important; */
+}
+
+@media (max-width: 768px) {
+    .btn-hover {
+        width: 90vw;
+    }
+}

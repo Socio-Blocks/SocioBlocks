@@ -1,0 +1,9 @@
+numpy
+pandas
+flask
+tensorflow
+keras
+flask-cors
+pygame
+opencv-python
+pinatapy-vourhey

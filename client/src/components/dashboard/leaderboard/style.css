@@ -1,0 +1,250 @@
+
+* {
+    margin:0;
+    padding:0;
+    font-family:Helvetica, Arial, sans-serif;
+  }
+  input[type=text], textarea, input[type=email], input[type=password], input[type=tel], input[type=url], input[type=search], input[type=date] {
+      padding: 10px;
+      width: 100%;
+      font-size: 14px;
+      font-family: inherit;
+      line-height: 24px;
+      color: #555;
+      background-color: #f1f1f1;
+      border: none;
+      transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+  }
+  input[type=text], textarea, input[type=email], input[type=password], input[type=tel], input[type=url], input[type=search], input[type=date], .material.woocommerce-page[data-form-style="default"] input#coupon_code {
+      background-color: rgba(0,0,0,0.1);
+      border-radius: 4px;
+      border: 2px solid rgba(0,0,0,0);
+  }
+
+    #leaderboard {
+        padding:50px;
+    }
+
+    .ldcont{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 3em;
+    }
+    .getld{
+        background-color: #686EF9;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+    }
+    .getld:hover{
+        background-color: #5055CB;
+        transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+    }
+    .ladder-nav {
+        display:flex;
+        flex-wrap:wrap;
+        align-items: center;
+        background:#5055CB;
+        padding:10px 25px;
+        border-radius:10px;
+        border:1px solid #686EF9;
+    }
+    .ladder-title {
+      flex:2;
+    }
+    .ladder-search {
+      flex:1;
+      padding-right:25px;
+    }
+    .ladder-title {
+      font-size:20px;
+      color:#fdfdfd!important;
+      font-weight:bold;
+      text-transform:uppercase;
+    }
+    .ladder-search input {
+        color:white
+    }
+    .ladder-search input::-webkit-input-placeholder { 
+        color: #888DFF;
+    }
+    .ladder-search input::-moz-placeholder {
+        color: #888DFF;
+    }
+    .ladder-search input:-ms-input-placeholder { 
+        color: #888DFF;
+    }
+    .ladder-search input:-moz-placeholder { 
+        color: #888DFF;
+    }
+
+  .leaderboard-results {
+    text-align:left;
+    border-collapse: collapse;
+  }
+  .leaderboard-results thead th {
+    padding: 25px;
+    color:#747474;
+    font-size:14px;
+    font-weight:bold;
+  }
+  .leaderboard-results tbody td {
+    padding:15px 25px;
+    font-size:16px;
+    border-bottom:5px solid #232323;
+  }
+  .leaderboard-results tbody td:nth-of-type(7) {
+    font-weight:bold;
+  }
+  .leaderboard-results tbody tr:hover td {
+      background:#1f1d1d;
+      color:white;
+      transition:all 0.2s ease;
+  }
+ 
+  .leaderboard-results tbody tr {
+    color:#747474;
+    background:#ffffff;
+  }
+  .leaderboard-results tbody tr:first-child {
+    color:#686EF9;
+  }
+  .leaderboard-results tbody tr:first-child:hover td {
+    color:#686EF9;
+  }
+  .leaderboard-results tbody span {
+    font-weight:bold;
+    padding:10px 15px;
+    border-radius:50%;
+  }
+  .leaderboard-results tbody tr:first-child span {
+    background:#5055CB;
+    color:white;
+  }
+  .leaderboard-results tbody tr span {
+    background:#262626;
+    color:#747474;
+  }
+
+
+
+  /*******************************
+* TABLE NO MORE - RESIZE TO MOBILE SIZE
+* Format a normal table to look great on mobile.
+*******************************/
+.table {
+  overflow: hidden;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 6px 0 rgba(0,0,0,.12), 0 1px 6px 0 rgba(0,0,0,.12);
+     -moz-box-shadow: 0 1px 6px 0 rgba(0,0,0,.12), 0 1px 6px 0 rgba(0,0,0,.12);
+          box-shadow: 0 1px 6px 0 rgba(0,0,0,.12), 0 1px 6px 0 rgba(0,0,0,.12);
+}
+
+.table > thead > tr > th {
+  border-bottom-color: #EEEEEE;
+}
+
+.table > tbody > tr > td, 
+.table > tbody > tr > th,
+.table > thead > tr > td, 
+.table > thead > tr > th {
+  padding: 15px;
+  background-color: #fff;
+  border-top-color: #EEEEEE;
+}
+
+.table > tbody > tr:hover > td {
+  background-color: #FAFAFA;
+}
+
+@media (max-width: 767px) {
+  .table-no-more,
+  .table-no-more > thead,
+  .table-no-more > thead > tr,
+  .table-no-more > thead > tr > th,
+  .table-no-more > tbody,
+  .table-no-more > tbody > tr,
+  .table-no-more > tbody > tr > td {
+      display: block;
+  }
+  
+  .table-no-more > thead {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+      opacity: 0;
+  }
+  
+  .table-no-more > tbody > tr > td {
+      position: relative;
+      padding-left: 45%;
+  }
+  
+  .table-no-more > tbody > tr:nth-child(even) > td {
+      background-color: #ffffff;
+  }
+  
+  .table-no-more > tbody > tr:nth-child(odd) > td {
+      background-color: #FAFAFA;
+  }
+  
+  .table-no-more > tbody > tr > td:before {
+  position: absolute;
+  top: 15px;
+  /* font-size: 20px; */
+  left: 5%;
+  width: 40%;
+  white-space: nowrap;
+      font-weight: bold;
+      word-wrap: break-word
+  }
+  
+  .table-no-more > tbody > tr > td:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
+      border-right: 1px solid #EEEEEE;
+      
+
+  }
+  
+  .table-no-more > tbody > tr > td:nth-of-type(1):before {content: "Address";}
+  .table-no-more > tbody > tr > td:nth-of-type(2):before {content: "Potholes detected";}
+}
+
+/* ----- v CAN BE DELETED v ----- */
+
+
+.demo {
+padding-top: 60px;
+padding-bottom: 110px;
+}
+
+.demo-footer {
+position: fixed;
+bottom: 0;
+width: 100%;
+padding: 15px;
+background-color: #212121;
+text-align: center;
+}
+
+.demo-footer > a {
+text-decoration: none;
+font-weight: bold;
+font-size: 14px;
+color: #fff;
+}
