@@ -21,7 +21,7 @@ import {
 
 
 function App() {
-  const [coin, setCoin] = useState(false);
+  const [coin, setCoin] = useState(0);
   const [balance, setBalance] = useState(0);
   const [walletAddress, setWalletAddress] = useState(0);
   const auth = useAuth();
@@ -30,6 +30,7 @@ function App() {
     lng: 0
   });
   const [iscorrectimg, setIscorrectimg] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [hash, setHash] = useState("");
   const [hashArray, setHashArray] = useState([]);
   
@@ -56,8 +57,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard auth={auth}/>}/>
         <Route path="/dashboard/leaderboard" element={<Leaderboard  />}/>
         <Route path="/dashboard/clickpicture" element={<Clickpic auth={auth} walletAddress={walletAddress}  setIscorrectimg={setIscorrectimg} setHash={setHash}/>}/>
-        <Route path="/rewards" element={<Unstable setCoin={setCoin} status={status} hashArray={hashArray}setHashArray={setHashArray}coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
-        <Route path="/dashboard/location" element={<Maps setStatus={setStatus} setCoords={setCoords} auth={auth} walletAddress={walletAddress} setCoin={setCoin} iscorrectimg={iscorrectimg} setIscorrectimg={setIscorrectimg} hash={hash}/>} />
+        <Route path="/rewards" element={<Unstable showModal={showModal} setShowModal={setShowModal} setCoin={setCoin} status={status} hashArray={hashArray}setHashArray={setHashArray}coin={coin} balance={balance} auth={auth} setBalance={setBalance} walletAddress={walletAddress} />}/>
+        <Route path="/dashboard/location" element={<Maps setShowModal={setShowModal} setStatus={setStatus} setCoords={setCoords} auth={auth} walletAddress={walletAddress} setCoin={setCoin} iscorrectimg={iscorrectimg} setIscorrectimg={setIscorrectimg} hash={hash}/>} />
         <Route path="/Account" element={<Account auth={auth} walletAddress={walletAddress}/>}/>
         <Route path="/logout" element={<Logout auth={auth}/>}/>
       </Routes>

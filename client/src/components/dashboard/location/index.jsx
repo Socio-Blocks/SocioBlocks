@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import nav from "../../../assets/nav.gif"
 import { FENCE_URL } from "../../../constants";
 
-export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg,setIscorrectimg,hash,setStatus }) {
+export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg,setIscorrectimg,hash,setStatus,setShowModal }) {
   
   const navigate = useNavigate();
   useEffect(() => {
@@ -31,9 +31,11 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
     var did10 = await checker_10()
     if(did10 == "Success"){
       setStatus("Congratulations you have earned 2 coins");
-      setCoin(true)
+      setCoin(2)
+      setShowModal(true)
     }else{
       setStatus("Sorry! the same location has been reported before");
+      setShowModal(true)
     }
   }
 
@@ -48,7 +50,8 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
       if (response.data.status === "outside geofence") {
         setStatus("Congratulations you have earned 2 coins");
         sendCoinParams(walletAddress,1,response.data.geofence_id,10,hash)
-        setCoin(true)
+        setCoin(2)
+        setShowModal(true)
         execute_function("addreporter")
         setIscorrectimg(false)
       } else {

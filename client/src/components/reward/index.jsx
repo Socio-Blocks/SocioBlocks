@@ -35,7 +35,7 @@ const Unstable = React.memo(function Reward({
   hashArray,
   setHashArray,
   status,
-  setCoin,
+  showModal
 })
 
 {
@@ -63,7 +63,7 @@ const Unstable = React.memo(function Reward({
     };
     getbalance();
   }, []);
-  const handleClose = () => setCoin(false);
+  const handleClose = () => setShowModal(false);
   const navigate = useNavigate();
   useEffect(() => {
     if (!auth.isLoggedIn) {
@@ -74,7 +74,7 @@ const Unstable = React.memo(function Reward({
   return (
     <div>
         <Modal
-        open={coin}
+        open={showModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -99,7 +99,7 @@ const Unstable = React.memo(function Reward({
       <div class="buttons">
       <button class="btn-hover color-9">
         Your total balance adds up to{" "}
-        <span class="amount">{parseInt(balance) / parseFloat(1000000000000000000) + coin} SC</span></button>
+        <span class="amount">{parseInt(balance) / parseFloat(1000000000000000000) + parseInt(coin)} SC</span></button>
       </div>
       <div>
       {show ? (
