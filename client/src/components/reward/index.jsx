@@ -54,7 +54,7 @@ const Unstable = React.memo(function Reward({
     <div>
       <Nav />
       <h3>{status}</h3>
-      <h2 style={{display:"flex",alignContent:"center"}}>
+      <h2 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
         Your total balance adds up to{" "}
         {parseInt(balance) / parseFloat(1000000000000000000) + coin} SC
       </h2>

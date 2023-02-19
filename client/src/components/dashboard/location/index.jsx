@@ -123,7 +123,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
       <CardMedia
         sx={{ width: 300 }}
         src={nav}
-        title="green iguana"
+        title="Your address"
       >
       <img src={nav} style={{height: "100%", width:"100%"}}/></CardMedia>
       <CardContent sx={{backgroundColor:"#1a2027", color:"white"}}>
