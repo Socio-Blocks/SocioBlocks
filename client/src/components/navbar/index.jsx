@@ -22,7 +22,7 @@ import image from '../../assets/logo.png'
 const pages = ['Rewards', 'Location', 'Leaderboard'];
 const pagesLink = ['/rewards', '/dashboard/location', '/dashboard/leaderboard'];
 const settings = ['Logout'];
-const settingsLink = ['/account', '/logout'];
+const settingsLink = [ '/logout'];
 
 
 
@@ -137,21 +137,25 @@ export default function Nav() {
                     width: "50px",
                     height: "50px",
                     border: "none",
-                    color: "white",
+                    backgroundColor: "black",
+  
                     fontFamily: 'monospace',
                     fontWeight: 700,
                     letterSpacing: '.3rem',
                     textDecoration: 'none',
                     fontSize: "30px",
                     cursor: "pointer",
-                    objectFit: "cover",
                     overflow: "hidden",
+                    
                   }   
                 }
               onClick={
                 () => navigate("/dashboard")
 
-              }></button>
+              }>
+                <img src={image} style={{width:"100%",height:"100%",borderRadius:500}}/>  
+
+              </button>
 
         </div>
 </Toolbar>

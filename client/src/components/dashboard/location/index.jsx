@@ -79,7 +79,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
         setLng(position.coords.longitude);
         var options = {
           method: 'GET',
-          url: 'https://apis.mapmyindia.com/advancedmaps/v1/e0e66fc4261deb0b6b3be5e07d39277e/rev_geocode',
+          url: 'https://apis.mapmyindia.com/advancedmaps/v1/d045ace116f09ed26fea3221efd9c193/rev_geocode',
           params: {lat: position.coords.latitude, lng: position.coords.longitude}
         };
         
@@ -122,7 +122,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
 
 <div style={{height:"100%",display:"flex",alignItems:"center",flexDirection:"column",margin:"1em"}}>
 
-your coordinates: {lat}, {lng}
+{/* your coordinates: {lat}, {lng} */}
 <Card sx={{ maxWidth: 700,margin: "2em",display:"flex",flexDirection:"row"}}>
       <CardMedia
         sx={{ width: 300 }}
