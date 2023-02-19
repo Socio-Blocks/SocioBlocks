@@ -17,6 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import Link from '@mui/material/Link';
 // import "./navbar.css"
+import image from '../../assets/logo.png'
 
 const pages = ['Rewards', 'Location', 'Leaderboard'];
 const pagesLink = ['/rewards', '/dashboard/location', '/dashboard/leaderboard'];
@@ -135,7 +136,6 @@ export default function Nav() {
                   {
                     width: "50px",
                     height: "50px",
-                    backgroundColor: "black",
                     border: "none",
                     color: "white",
                     fontFamily: 'monospace',
@@ -146,7 +146,6 @@ export default function Nav() {
                     cursor: "pointer",
                     objectFit: "cover",
                     overflow: "hidden",
-                    backgroundImage: `url("https://imageupscaler.com/UploadedFiles/63f1f9f0361796.61445084Processed.png")`
                   }   
                 }
               onClick={
@@ -164,24 +163,26 @@ export default function Nav() {
                   {
                     width: "50px",
                     height: "50px",
-                    backgroundColor: "black",
                     border: "none",
-                    color: "white",
+                    backgroundColor: "black",
+  
                     fontFamily: 'monospace',
                     fontWeight: 700,
                     letterSpacing: '.3rem',
                     textDecoration: 'none',
                     fontSize: "30px",
                     cursor: "pointer",
-                    objectFit: "cover",
                     overflow: "hidden",
-                    backgroundImage: `url("https://imageupscaler.com/UploadedFiles/63f1f9f0361796.61445084Processed.png")`
+                    
                   }   
                 }
               onClick={
                 () => navigate("/dashboard")
 
-              }></button>
+              }>
+                <img src={image} style={{width:"100%",height:"100%",borderRadius:500}}/>  
+
+              </button>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
                   <Button
