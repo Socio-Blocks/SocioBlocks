@@ -1,4 +1,5 @@
 # Import flask and datetime module for showing date and time
+from time import sleep
 from flask import Flask, request, jsonify
 import datetime
 import tensorflow as tf
@@ -78,21 +79,28 @@ def image():
     print(op)
     if(np.argmax(op) == 0):
         print("Pothole")
-        file = "output"
+        file = "output.jpg"
         a = uploader(file)
         print(a)
-        return 'Success'
+        return {'status': 'Success', "hash": a}
     else:
         print("No Pothole")
-        return 'Failed'
+        return {'status': 'Failed'}
 	# Returning an api for showing in reactjs
     return 'Failed'
 
 
 @app.route('/api/reciveimg', methods=['POST'])
 def reciveimg():
-    b = input("enter file name: ")
-    retriever(a,b)
+    a = (request.data)
+    x = json.loads(a.decode('utf-8'))
+    b = "temp.jpg"
+    url = []
+    for i in x['hash']:
+        sleep(1)
+        url.append(retriever(i,b))
+    # return url
+    return jsonify(url)
 
 
 

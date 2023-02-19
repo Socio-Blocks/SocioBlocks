@@ -3,7 +3,7 @@ import MapmyIndia from "mapmyindia-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Nav from "../../navbar";
-import {sendCoinParams,execute_function,setCheckParams} from "../../../test.js"
+import {sendCoinParams,execute_function,setCheckParams,checker_10} from "../../../test.js"
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import Card from '@mui/material/Card';
@@ -12,37 +12,49 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import nav from "../../../assets/nav.gif"
-export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg,setIscorrectimg }) {
+import { FENCE_URL } from "../../../constants";
+
+export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg,setIscorrectimg,hash,setStatus }) {
   
   const navigate = useNavigate();
-  // useEffect(() => {
-  //     if (!auth.isLoggedIn) {
-  //       navigate("/Authentication");
-  //     }
-  //   },[])
+  useEffect(() => {
+      if (!auth.isLoggedIn) {
+        navigate("/Authentication");
+      }
+    },[])
   const [lat, setLat] = React.useState(0);
   const [lng, setLng] = React.useState(0);
-
-  const [status, setStatus] = React.useState("gps coordinates used");
   const [address, setAddress] = React.useState({});
+
+
+  const check10 = async () => {
+    var did10 = await checker_10()
+    if(did10 == "Success"){
+      setStatus("Congratulations you have earned 2 coins");
+      setCoin(2)
+    }else{
+      setStatus("Sorry! the same location has been reported before");
+    }
+  }
+
 
   const takecords = async () => {
     // console.log(lat, lng);
-    await axios.post("https://2599-122-50-208-12.in.ngrok.io/api/fence", {
+    await axios.post(FENCE_URL +"/api/fence", {
       lat: lat,
       lng: lng,
     }).then(function (response) {
       console.log(response);
       if (response.data.status === "outside geofence") {
-        setStatus("coordinates are valid");
-        sendCoinParams(walletAddress,1,response.data.geofence_id,10)
+        setStatus("Congratulations you have earned 2 coins");
+        sendCoinParams(walletAddress,1,response.data.geofence_id,10,hash)
         setCoin(2)
         execute_function("addreporter")
         setIscorrectimg(false)
       } else {
-        setStatus("coordinates are invalid");
-        setCheckParams(response.data.geofence_id,walletAddress)
+        setCheckParams(response.data.geofence_id,walletAddress,hash)
         execute_function("check")
+        check10()
         setIscorrectimg(false)
       }
     });

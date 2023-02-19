@@ -20,7 +20,7 @@ export default function Leaderboard() {
       <button onClick={getleaderboard}>Leaderboard</button>
 
 
-    {
+    {/* {
       Leaderboard.map((item, index) => {
         return (
           <div key={index} style={{display: "flex"}}>
@@ -29,7 +29,7 @@ export default function Leaderboard() {
           </div>
         )
       })
-    }
+    } */}
 
     </div>
   )

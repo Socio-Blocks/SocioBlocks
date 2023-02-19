@@ -2,7 +2,7 @@ import Web3 from 'web3'
 
 const Web3js = new Web3(new Web3.providers.HttpProvider("https://rpc.testnet.mantle.xyz/"))
 const privateKey = '9d179dc30b1774c81bad37b550e750bc9a26073974201c7bf46d3e3b2988a330' //Your Private key environment variable
-let tokenAddress = '0x69255AC31d1803ba492EB9da3688ca16e6Ce83c8' // Demo Token contract address
+let tokenAddress = '0x5b840FB0B7d6b91a7f0b3A10737b316987cf3C11' // Demo Token contract address
 
 let to_address = '0x6d66341f0363D32f7a1A8b40C1ff472fEd9aaA56' // metro madan thatandhu
 
@@ -627,7 +627,6 @@ let data_5=contract.methods.paying_one_decimal(wallet_address,to_address,amount)
 let data_6=contract.methods.paying_two_decimal(wallet_address,to_address,amount).encodeABI()
 
 
-
 export function setCheckParams(geofence_id,wallet_address,hash){
 	 data_2=contract.methods.checker(geofence_id,wallet_address,hash).encodeABI()
 }
@@ -635,6 +634,14 @@ export function setCheckParams(geofence_id,wallet_address,hash){
 export function sendCoinParams(wallet_address,pothole_id, geofence_id, intensity,hash){
 	data_7 = contract.methods.addreporter(wallet_address,pothole_id, geofence_id, intensity,hash).encodeABI()
 }
+
+
+
+
+// var hash ="QmdcP8R36NDToAVJfaiRxZkuS9e339FBqCsYcJT5tBx4Vd"
+// sendCoinParams(wallet_address,pothole_id, geofence_id, intensity,hash)
+
+
 
 export function execute_function(input) {
 
@@ -707,10 +714,49 @@ export function leaderboard() {
 		if (error) {
 		  reject(error);
 		} else {
-			console.log("inside");
 		  resolve(result);
 		}
 	  });
 	});
   }
   
+
+export function get_hash(wallet_address) {
+	return new Promise((resolve, reject) => {
+		contract.methods.hash_returner(wallet_address).call((error, result) => {
+			if (error) {
+				reject(error);
+			} else {
+				resolve(result);
+			}
+		});
+	});
+}
+
+
+
+
+export function get_reporter_score(wallet_address) {
+	return new Promise((resolve, reject) => {
+		contract.methods.getScore(wallet_address).call((error, result) => {
+			if (error) {
+				reject(error);
+			} else {
+				resolve(result);
+			}
+		});
+	});
+}
+
+export function checker_10(geofence_id) {
+	return new Promise((resolve, reject) => {
+		contract.methods.checker_10(geofence_id).call((error, result) => {
+			if (error) {
+				reject(error);
+			} else {
+				resolve(result);
+			}
+		});
+	});
+}
+

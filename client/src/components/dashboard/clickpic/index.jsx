@@ -4,7 +4,7 @@ import "react-html5-camera-photo/build/css/index.css";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Nav from "../../navbar";
-
+import {MODEL_URL} from "../../../constants"
 
 export default function Clickpic(props) {
   const [loading, setLoading] = React.useState(false);
@@ -46,14 +46,14 @@ export default function Clickpic(props) {
   async function  onCapture(dataUri) {
     setLoading(true);
     setDataUri(dataUri);
-    var res = await axios.post("https://32cf-2406-7400-73-e557-c8e4-3f24-69e4-a4d0.in.ngrok.io/api/pothole", {
+    var res = await axios.post(MODEL_URL +"/api/pothole", {
         image: dataUri
       })
       .then(function (response) {
         console.log(response);
-        if(response.data === "Success"){
-          //call blockchain function
+        if(response.data.status === "Success"){
           props.setIscorrectimg(true)
+          props.setHash(response.data.hash)
           navigate("/dashboard/location");
         }else{
           setResponse("Image is not clear please try again")
