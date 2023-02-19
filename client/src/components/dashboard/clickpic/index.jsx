@@ -19,23 +19,23 @@ export default function Clickpic(props) {
 
 
   function handleTakePhoto(dataUri) {
-    console.log("takePhoto");
+    console.log("");
   }
 
   function handleTakePhotoAnimationDone(dataUri) {
-    console.log("takePhoto", dataUri);
+    console.log("");
   }
 
   function handleCameraError(error) {
-    console.log("handleCameraError", error);
+    console.log("");
   }
 
   function handleCameraStart(stream) {
-    console.log("handleCameraStart");
+    console.log("");
   }
 
   function handleCameraStop() {
-    console.log("handleCameraStop");
+    console.log("");
   }
 
   function cameraClosed(){

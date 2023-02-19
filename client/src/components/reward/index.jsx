@@ -43,7 +43,6 @@ const Unstable = React.memo(function Reward({
   const [show, setShow] = React.useState(false);
   useEffect(() => {
     // setHashArray([]);
-    console.log("%c%s", "color: #ff0000", "getbalance");
     const getbalance = async () => {
       let balance_data = await get_balance(walletAddress);
       setBalance(balance_data);
@@ -54,7 +53,6 @@ const Unstable = React.memo(function Reward({
         .post(MODEL_URL + "/api/reciveimg", { hash: hash_data })
         .then((res) => {
           link_arr = res;
-          console.log(link_arr);
           setHashArray(link_arr.data);
           setShow(true);
         })
@@ -91,17 +89,10 @@ const Unstable = React.memo(function Reward({
         </Box>
       </Modal>
       <Nav />
-      {/* <h3 style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "Roboto",
-        }}>
-      {status}</h3> */}
       <div class="buttons">
       <button class="btn-hover color-9">
         Your total balance adds up to{" "}
-        <span class="amount">{parseInt(balance) / parseFloat(1000000000000000000) + parseInt(coin)} SC</span></button>
+        <span class="amount">{parseInt(balance) / parseFloat(1000000000000000000) + parseInt(coin? 2:0)} SC</span></button>
       </div>
       <div>
       {show ? (

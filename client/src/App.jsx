@@ -21,7 +21,7 @@ import {
 
 
 function App() {
-  const [coin, setCoin] = useState(0);
+  const [coin, setCoin] = useState(true);
   const [balance, setBalance] = useState(0);
   const [walletAddress, setWalletAddress] = useState(0);
   const auth = useAuth();
@@ -36,7 +36,7 @@ function App() {
   
   const [status, setStatus] = useState("");
   useEffect(() => {
-    console.log(auth);
+    // console.log(auth);
 
     if(auth.user)
     setWalletAddress(auth.user.address);
@@ -45,6 +45,9 @@ function App() {
   }, [auth]);
 
 
+  useEffect(() => {
+    console.log('%c%s', 'color: #00a3cc', status);
+  }, [status])
 
 
 

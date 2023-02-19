@@ -753,7 +753,8 @@ export function checker_10(geofence_id) {
 			if (error) {
 				reject(error);
 			} else {
-				resolve(result);
+				resolve("Failed");
+
 			}
 		});
 	});

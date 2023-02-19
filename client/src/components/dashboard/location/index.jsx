@@ -27,15 +27,14 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
   const [address, setAddress] = React.useState({});
 
 
-  const check10 = async () => {
-    var did10 = await checker_10()
-    if(did10 == "Success"){
-      setStatus("Congratulations you have earned 2 coins");
-      setCoin(2)
-      setShowModal(true)
-    }else{
+  const check10 = async (geofence_id) => {
+    var did10 = await checker_10(geofence_id)
+    console.log(did10)
+    if(did10 == "Failed"){
       setStatus("Sorry! the same location has been reported before");
-      setShowModal(true)
+    }else{
+      setStatus("Congratulations you have earned 2 coins");
+      setCoin(true)
     }
   }
 
@@ -50,15 +49,16 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
       if (response.data.status === "outside geofence") {
         setStatus("Congratulations you have earned 2 coins");
         sendCoinParams(walletAddress,1,response.data.geofence_id,10,hash)
-        setCoin(2)
+        setCoin(true)
         setShowModal(true)
         execute_function("addreporter")
         setIscorrectimg(false)
       } else {
         setCheckParams(response.data.geofence_id,walletAddress,hash)
         execute_function("check")
-        check10()
+        check10(response.data.geofence_id)
         setIscorrectimg(false)
+        setShowModal(true)
       }
     });
     setCoords({
@@ -106,7 +106,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
         markers={[
           {
             position: [lat, lng],
-            draggable: false,
+            draggable: true,
             title: "Your location",
             onClick: (e) => {
               console.log("clicked ");
@@ -121,7 +121,7 @@ export default function Maps({ setCoords,auth,walletAddress,setCoin,iscorrectimg
 
 <div style={{height:"100%",display:"flex",alignItems:"center",flexDirection:"column",margin:"1em"}}>
 
-
+your coordinates: {lat}, {lng}
 <Card sx={{ maxWidth: 700,margin: "2em",display:"flex",flexDirection:"row"}}>
       <CardMedia
         sx={{ width: 300 }}
