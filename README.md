@@ -22,14 +22,20 @@ Once the initial setup of the application is done, now the application will disp
 
 ![This is an image](https://i.postimg.cc/5978zZh6/A5-FD74-E7-A182-44-C2-A266-520-E8-EB092-A1.png)
 
-Clicking on the option enables the user's device camera. As soon as the camera is enabled, the inbuilt ML model starts to detect the pothole on road. Clicking on the capture button takes a picture of the pothole.
+
+
+![{79009FFE-5CCB-49DB-A9B2-5394C3FB741B}](https://user-images.githubusercontent.com/111639304/220173220-a6f115aa-70d1-45de-add4-c3fabfd9ca3e.png)
+
+
+
+Clicking on the '**Click to report pothole**' option enables the user's device camera. As soon as the camera is enabled, the inbuilt ML model starts to detect the pothole on road. Clicking on the capture button takes a picture of the pothole.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/111639304/220115173-e8e129ff-5c11-42b7-a0f6-88d0cb9cbc9a.png">
 </p>
 
 
-And also the location of the pothole is displayed on the application
+**And also the location of the pothole is displayed on the application**
 
 ![{BFC43FD8-9CE1-41C3-A62D-967871051B76}-min](https://user-images.githubusercontent.com/111639304/220113088-5067012d-16f7-4cf7-9883-ddc697b39f3b.png)
 
