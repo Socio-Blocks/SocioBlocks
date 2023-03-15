@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 
 const Web3js = new Web3(new Web3.providers.HttpProvider("https://rpc.testnet.mantle.xyz/"))
-const privateKey = '9d179dc30b1774c81bad37b550e750bc9a26073974201c7bf46d3e3b2988a330' //Your Private key environment variable
+const privateKey = '------' //Your Private key environment variable
 let tokenAddress = '0x76aD989AfEb306D66fdDE97c2e9F16d0733aDF1C' // Demo Token contract address
 
 let to_address = '0x6d66341f0363D32f7a1A8b40C1ff472fEd9aaA56' // metro madan thatandhu
